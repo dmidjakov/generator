@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+            $( function() {
+              $( "#datepicker" ).datepicker();
+            } );
+            </script>
+    <title>Document</title>
+</head>
+<body>
+    TRAHVITEATE GENERAATOR V0.1
+    <br>
+    <br>
+ <form id="mainForm" action="" >
+   
+    
+ Mootorsõiduki omaniku (vastutava kasutaja) nimi:   <input name = "nimi" type="text">
+ <br>
+ Isikukood/registrikood:<input name = "" type="text"><br>
+ Elukoht/asukoht:<input name = "" type="text">
+ <br>
+ Registreerimismärk<input name = "" type="text"><br>
+ Rikkumise toimepanemise kuupaev:<input id = "datepicker" type="text">Aeg:<input type="text"><br>
+ Rikkumise koht:<input name = "" type="text"><br>
+ Rikkumise kirjeldus<input name = "" type="text"><br>
+<button onclick="myFunction()">Genereeri</button>
+</form>  
+<script>
+        function myFunction() {
+           var nimi = document.getElementById("mainForm").elements[0].value;
+           var kood = document.getElementById("mainForm").elements[1].value;
+           var elukoht = document.getElementById("mainForm").elements[2].value;
+            var mark = document.getElementById("mainForm").elements[3].value;
+            var kuupaev = document.getElementById("mainForm").elements[4].value;
+            var aeg = document.getElementById("mainForm").elements[5].value;
+            var  koht = document.getElementById("mainForm").elements[6].value;
+            var kirjeldus = document.getElementById("mainForm").elements[7].value;
+            document.write(nimi+kood+elukoht+mark+kuupaev+koht+kirjeldus);
+        }
+        </script> 
+</body>
+</html>
