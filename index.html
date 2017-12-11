@@ -9,20 +9,20 @@
     <link rel="stylesheet" type "text/css" href="css/styles.css">
     <script src="js/jquery-1.12.4.js"></script>
     <script src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="start.js"></script>
     <script>
             $( function() {
               $( "#datepicker" ).datepicker({ dateFormat: 'dd.mm.yy' , firstDay: 1});
             } );
             </script>
+   
     <title></title>
 </head>
 <body>
    <div align = "center"><b>KIRJALIKUS HOIATAMISMENETLUSES<br> TRAHVITEATE GENERAATOR V0.0.1</b></div> 
     <br>
     <br>
- <form id="mainForm" name = "mainForm" action="" >
-   
-    
+ <form id="mainForm" name = "mainForm"> 
  <div>Mootorsõiduki omaniku (vastutava kasutaja) nimi:   <input class = "form-control" id = "nimi" name = "nimi" type="text"><br></div>
  <div> Isikukood/registrikood: <input class = "form-control" name = "kood" type="text"><br></div>
     <div>Elukoht/asukoht:<input class = "form-control" name = "elukoht" type="text"><br></div>
@@ -32,32 +32,18 @@
                 <div>Rikkumise koht:<input class = "form-control" name = "koht" type="text"><br></div>
                    <div>Rikkumise kirjeldus:<select class = "form-control"  name = "kirjeldus">
                        <option value="0" disabled selected>Rikkumise lühikirleldus</option>
-                       <option value="1"></option>
-                       <option value="2"></option>
-                       <option value="3"></option>
-                       <option value="4"></option>
+                       <option value="1">seadus 1</option>
+                       <option value="2">seadus 2</option>
+                       <option value="3">seadus 3</option>
+                       <option value="4">seadus 4</option>
                        <option value="5"></option>
                        <option value="6"></option> 
                        <br> </div>
-                        <div class = "form-group"><button onclick="myFunction()">Click me</button><br></div>
                         
 
         
 </form>  
 <br>
-<div id = "mainForm"><input type="button" class="btn btn-default" value="Genereeri1"></div>
-<script>
-        function myFunction() {
-           var nimi = document.getElementById("mainForm").elements[0].value;
-           var kood = document.getElementById("mainForm").elements[1].value;
-           var elukoht = document.getElementById("mainForm").elements[2].value;
-            var mark = document.getElementById("mainForm").elements[3].value;
-            var kuupaev = document.getElementById("mainForm").elements[4].value;
-            var aeg = document.getElementById("mainForm").elements[5].value;
-            var  koht = document.getElementById("mainForm").elements[6].value;
-            var kirjeldus = document.getElementById("mainForm").elements[7].value;
-            document.write(nimi+kood+elukoht+mark+kuupaev+koht+kirjeldus);
-        }
-        </script> 
+<div id = "mainForm"><input type="button" class="btn btn-default" onclick="generateFile()" value="Genereeri"></div>
 </body>
 </html>

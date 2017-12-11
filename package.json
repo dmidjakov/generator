@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.html",
   "window":{
+    "toolbar":true,
     "min_width":400,
     "min_height":680,
     "resizable":false,
