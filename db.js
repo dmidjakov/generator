@@ -1,9 +1,10 @@
-  const sqlite3 = require('sqlite3').verbose();
+  var sqlite3 = require('sqlite3').verbose();
  
-  let db = new sqlite3.Database('./db/sample.db');
+  var db = new sqlite3.Database('./db/sample.db');
+  var python = "Djakov Dmitri";
  
   // insert one row into the langs table
-  db.run(`INSERT INTO langs(name) VALUES(?)`, ['C'], function(err) {
+  db.run(`INSERT INTO langs(name) VALUES(?)`, [python], function(err) {
     if (err) {
       return console.log(err.message);
     }

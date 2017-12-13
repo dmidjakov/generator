@@ -3,7 +3,7 @@ var Docxtemplater = require('docxtemplater');
 var fs = require('fs');
 var path = require('path');
 //Load the docx file as a binary
-var content = fs.readFileSync(path.resolve('input.docx'), 'binary');
+var content = fs.readFileSync(path.resolve('BlankDoc.docx'), 'binary');
 var zip = new JSZip(content);
 var doc = new Docxtemplater();
 doc.loadZip(zip);
@@ -45,5 +45,13 @@ var buf = doc.getZip().generate({type: 'nodebuffer'});
 
 // buf is a nodejs buffer, you can either write it to a file or do anything else with it.
 fs.writeFileSync(path.resolve('output.docx'), buf);
+
+//Writing to database
+var sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database('./db/sample.db');
+
+ db.run(`INSERT INTO langs(name) VALUES(?)`, [nimi]);
+  db.close();
+
 };
 
