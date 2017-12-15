@@ -18,11 +18,20 @@ function generateFile() {
      var aeg = document.getElementById("mainForm").elements[5].value;
      var  koht = document.getElementById("mainForm").elements[6].value;
      var kirjeldus = document.getElementById("mainForm").elements[7].value;
+    var Today = new Date();
+    var  koostamiseKPV=Today.getDate() + "." + (Today.getMonth()+1)  + "." + Today.getFullYear();
+    var kvalifikatsioon="seadus"
 doc.setData({
-    first_name: nimi,
-    last_name: 'Doe',
-    phone: '0652455478',
-    description: 'New Website'
+    nimi: nimi,
+    kood: kood,
+    elukoht: elukoht,
+    mark: mark,
+    kuupaev: kuupaev,
+    aeg: aeg,
+    koht: koht,
+    kirjeldus: kirjeldus,
+    kvalifikatsioon: kvalifikatsioon,
+    koostamiseKPV: koostamiseKPV
 });
 
 try {
@@ -44,7 +53,7 @@ catch (error) {
 var buf = doc.getZip().generate({type: 'nodebuffer'});
 
 // buf is a nodejs buffer, you can either write it to a file or do anything else with it.
-fs.writeFileSync(path.resolve('output.docx'), buf);
+fs.writeFileSync(path.resolve(mark+'.docx'), buf);
 
 //Writing to database
 var sqlite3 = require('sqlite3').verbose();
