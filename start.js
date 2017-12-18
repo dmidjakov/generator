@@ -64,3 +64,4 @@ var db = new sqlite3.Database('./db/sample.db');
 
 };
 
+//delete from viitenumbrid where viitenum in (select viitenum from viitenumbrid order by viitenum limit 1)
