@@ -7,7 +7,13 @@ var content = fs.readFileSync(path.resolve('BlankDoc.docx'), 'binary');
 var zip = new JSZip(content);
 var doc = new Docxtemplater();
 doc.loadZip(zip);
+var sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database('./db/sample.db');
+
 //set the templateVariables
+function clearForm(){
+    document.getElementById("mainForm").reset(); 
+};
 
 function generateFile() {
     var nimi = document.getElementById("mainForm").elements[0].value;
@@ -20,7 +26,65 @@ function generateFile() {
      var kirjeldus = document.getElementById("mainForm").elements[7].value;
     var Today = new Date();
     var  koostamiseKPV=Today.getDate() + "." + (Today.getMonth()+1)  + "." + Today.getFullYear();
-    var kvalifikatsioon="seadus"
+    switch (kirjeldus) {
+        case 'mootorsõiduk pargitud kohas, kus liikluskorraldusvahend seda ei luba, aga nimelt - liiklusmärgi nr 361 (peatumise keeld) mõjupiirkonnas.':
+        var  norm = 'liiklusseadus § 21 lg 4 p 2';
+        break;
+        case 'mootorsõiduk pargitud kohas, kus liikluskorraldusvahend seda ei luba, aga nimelt - liiklusmärgi nr 362 (parkimise keeld) mõjupiirkonnas.':
+        var   norm = 'liiklusseadus § 21 lg 4 p 2';
+        break;
+         case 'mootorsõiduk pargitud kohas, kus liikluskorraldusvahend seda ei luba, aga nimelt - liiklusmärgi nr 383 (peatumise keelu ala) mõjupiirkonnas.':
+         var  norm = 'liiklusseadus § 21 lg 4 p 2';
+        break;
+          case 'mootorsõiduk pargitud kohas, kus liikluskorraldusvahend seda ei luba, aga nimelt - liiklusmärgi nr 384 (parkimise keelu ala) mõjupiirkonnas.':
+         var  norm = 'liiklusseadus § 21 lg 4 p 2';
+        break;
+         case 'mootorsõiduk pargitud kohas, kus liikluskorraldusvahend seda ei luba, aga nimelt - liiklusmärgi nr 363 (parkimiskeeld paaritul kuupäeval) mõjupiirkonnas.':
+        var   norm = 'liiklusseadus § 21 lg 4 p 2';
+        break;
+         case 'mootorsõiduk pargitud kohas, kus liikluskorraldusvahend seda ei luba, aga nimelt - liiklusmärgi nr 364 (parkimiskeeld paaris kuupäeval) mõjupiirkonnas.':
+         var  norm = 'liiklusseadus § 21 lg 4 p 2';
+        break;
+         case 'mootorsõiduk pargitud kohas, kus liikluskorraldusvahend seda ei luba, aga nimelt - liiklusmärgi nr 874 (puudega inimese sõiduk) nõudeid eirates. Mootorsõidukis puudus puudega inimese sõiduki parkimiskaart':
+         var  norm = 'liiklusseadus § 21 lg 4 p 2';
+        break;
+         case 'mootorsõiduk pargitud kohas, kus liikluskorraldusvahend seda ei luba, aga nimelt - teekattemärgise nr 976 (puudega inimese sõiduki parkimiskoht) nõudeid eirates.':
+         var  norm = 'liiklusseadus § 21 lg 4 p 2';
+        break;
+         case 'mootorsõiduk pargitud kohas, kus liikluskorraldusvahend seda ei luba, aga nimelt - teekattemärgise nr 931 (peatamiskeelu joon) nõudeid eirates.':
+         var  norm = 'liiklusseadus § 21 lg 4 p 3';
+        break;
+         case 'mootorsõiduk pargitud kohas, kus liikluskorraldusvahend seda ei luba, aga nimelt - teekattemärgise nr 932 (parkimiskeelu joon) nõudeid eirates.':
+         var  norm = 'liiklusseadus § 21 lg 4 p 4';
+        break;
+         case 'mootorsõiduk pargitud keelatud kohas - osaliselt või täielikult kõnniteel, kus ei olnud liikluskorraldusvahenditega ettenähtud parkimist.':
+         var  norm = 'liiklusseadus § 21 lg 4 p 3';
+        break;
+         case 'mootorsõiduk pargitud keelatud kohas - ülekäigurajal.':
+       var    norm = 'liiklusseadus § 21 lg 2 p 6';
+        break;
+         case 'mootorsõiduk pargitud keelatud kohas - lähemal kui 5m enne jalakäijate ülekäigurada.':
+       var    norm = 'liiklusseadus § 21 lg 2 p 6';
+        break;
+         case 'mootorsõiduk pargitud keelatud kohas, kus sõidurada (suunavööndit) tähistava pideva märgisjoone ja peatatud sõiduki vahe oli alla 3m.':
+       var    norm = 'liiklusseadus § 21 lg 2 p 7';
+        break;
+         case 'mootorsõiduk pargitud keelatud kohas - haljasalal ilma selle omaniku (valdaja) loata.':
+       var    norm = 'liiklusseadus § 21 lg 2 p 12';
+        break;
+         case 'mootorsõiduk pargitud keelatud kohas - teekattele märgitud parkimiskohtade kõrval.':
+        var   norm = 'liiklusseadus § 21 lg 4 p 4';
+        break;
+         case 'mootorsõiduk pargitud kohas, kus takistas teiste sõidukite lahkumise parkimiskohtadelt.':
+       var    norm = 'liiklusseadus § 21 lg 4 p 8';
+        break;
+         case 'mootorsõiduk pargitud viisil, mis takistab välja-/sissesõitu hoovi/teega külgnevale alale/ garaaži, õuealale':
+       var    norm = 'liiklusseadus § 20 lg 1';
+        break;
+         
+          default:
+    }
+    
 doc.setData({
     nimi: nimi,
     kood: kood,
@@ -30,8 +94,9 @@ doc.setData({
     aeg: aeg,
     koht: koht,
     kirjeldus: kirjeldus,
-    kvalifikatsioon: kvalifikatsioon,
-    koostamiseKPV: koostamiseKPV
+    norm: norm,
+    koostamiseKPV: koostamiseKPV,
+    viitenumber: viitenumber
 });
 
 try {
