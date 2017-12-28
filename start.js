@@ -1,31 +1,41 @@
+//'use strict';
+
 var JSZip = require('jszip');
 var Docxtemplater = require('docxtemplater');
 var fs = require('fs');
 var path = require('path');
+
 //Load the docx file as a binary
 var content = fs.readFileSync(path.resolve('BlankDoc.docx'), 'binary');
 var zip = new JSZip(content);
 var doc = new Docxtemplater();
 doc.loadZip(zip);
-var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('./db/sample.db');
+let sqlite = require('sqlite-sync');
+sqlite.connect('db/sample.db');
 
-//set the templateVariables
+
 function clearForm(){
-    document.getElementById("mainForm").reset(); 
+sqlite.run("DELETE FROM viitenumbrid WHERE viitenum = ?",[viitenumber]);
+chrome.runtime.reload();
+
 };
 
 function generateFile() {
-    var nimi = document.getElementById("mainForm").elements[0].value;
-    var kood = document.getElementById("mainForm").elements[1].value;
-    var elukoht = document.getElementById("mainForm").elements[2].value;
-     var mark = document.getElementById("mainForm").elements[3].value;
-     var kuupaev = document.getElementById("mainForm").elements[4].value;
-     var aeg = document.getElementById("mainForm").elements[5].value;
-     var  koht = document.getElementById("mainForm").elements[6].value;
-     var kirjeldus = document.getElementById("mainForm").elements[7].value;
-    var Today = new Date();
-    var  koostamiseKPV=Today.getDate() + "." + (Today.getMonth()+1)  + "." + Today.getFullYear();
+
+let rows = sqlite.run("select * from viitenumbrid where viitenum is not null limit 1");
+let viitenumArr = rows[0];
+viitenumber =JSON.parse(viitenumArr.viitenum);
+    nimi = document.getElementById("mainForm").elements[0].value;
+    kood = document.getElementById("mainForm").elements[1].value;
+    elukoht = document.getElementById("mainForm").elements[2].value;
+    mark = document.getElementById("mainForm").elements[3].value;
+    kuupaev = document.getElementById("mainForm").elements[4].value;
+    aeg = document.getElementById("mainForm").elements[5].value;
+    koht = document.getElementById("mainForm").elements[6].value;
+    kirjeldus = document.getElementById("mainForm").elements[7].value;
+    Today = new Date();
+    koostamiseKPV=Today.getDate() + "." + (Today.getMonth()+1)  + "." + Today.getFullYear();
+
     switch (kirjeldus) {
         case 'mootorsõiduk pargitud kohas, kus liikluskorraldusvahend seda ei luba, aga nimelt - liiklusmärgi nr 361 (peatumise keeld) mõjupiirkonnas.':
         var  norm = 'liiklusseadus § 21 lg 4 p 2';
@@ -84,6 +94,8 @@ function generateFile() {
          
           default:
     }
+
+
     
 doc.setData({
     nimi: nimi,
@@ -99,9 +111,11 @@ doc.setData({
     viitenumber: viitenumber
 });
 
+
 try {
     // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
     doc.render()
+    sqlite.run("DELETE FROM viitenumbrid WHERE viitenum = ?",[viitenumber]);
 }
 catch (error) {
     var e = {
@@ -113,20 +127,15 @@ catch (error) {
     console.log(JSON.stringify({error: e}));
     // The error thrown here contains additional information when logged with JSON.stringify (it contains a property object).
     throw error;
-}
+};
 
 var buf = doc.getZip().generate({type: 'nodebuffer'});
 
 // buf is a nodejs buffer, you can either write it to a file or do anything else with it.
 fs.writeFileSync(path.resolve(mark+'.docx'), buf);
 
-//Writing to database
-var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('./db/sample.db');
-
- db.run(`INSERT INTO langs(name) VALUES(?)`, [nimi]);
-  db.close();
-
 };
+
+
 
 //delete from viitenumbrid where viitenum in (select viitenum from viitenumbrid order by viitenum limit 1)

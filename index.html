@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type "text/css" href="css/styles.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="js/jquery-1.12.4.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script type="text/javascript" src="start.js"></script>
@@ -15,11 +16,12 @@
               $( "#datepicker" ).datepicker({ dateFormat: 'dd.mm.yy' , firstDay: 1});
             } );
             </script>
-   
     <title></title>
 </head>
 <body>
    <div align = "center"><b>KIRJALIKUS HOIATAMISMENETLUSES<br> TRAHVITEATE GENERAATOR V0.0.1</b></div> 
+
+   
     <br>
  <form id="mainForm" name = "mainForm"> 
  <div>Mootorsõiduki omaniku (vastutava kasutaja) nimi:   <input class = "form-control" id = "nimi" name = "nimi" type="text"><br></div>
@@ -210,19 +212,12 @@
                        <option value="mootorsõiduk pargitud keelatud kohas - haljasalal ilma selle omaniku (valdaja) loata.">Haljasalal</option>
                        <option value="mootorsõiduk pargitud keelatud kohas - teekattele märgitud parkimiskohtade kõrval.">Märgistuse kõrval</option>
                        <option value="mootorsõiduk pargitud kohas, kus takistas teiste sõidukite lahkumise parkimiskohtadelt.">takistas lahkumise</option>
-                       <option value="mootorsõiduk pargitud viisil, mis takistab välja-/sissesõitu hoovi/teega külgnevale alale/ garaaži, õuealale">takistab välja/sissesõitu</option>
-                       <br> </div>
-                        
-
-        
+                       <option value="mootorsõiduk pargitud viisil, mis takistab välja-/sissesõitu hoovi/teega külgnevale alale/ garaaži, õuealale">takistab välja/sissesõitu</option>      
+         </div>
+                                    
 </form>  
-<br>
-<div class = "btn-group"><input type="button" id="btnSearch" class="btn btn-default" onclick="generateFile()" value="Genereeri"></div>
-<div class = "btn-group"><input type="button" id="btnClear" class="btn btn-primary" onclick="clearForm()" value="Puhasta"></div>
-<br>
-<div class="btn-group">
-        <button type="button" class="btn btn-primary"onclick="generateFile()">Genereeri</button>
-        <button type="button" class="btn btn-primary" onclick="clearForm()">Puhasta</button>
-      </div>
+<div ><br><input type="button" id="btnSearch" class="btn btn-primary" onclick="generateFile()" value="Genereeri!"> &nbsp; <input type="button" id="btnClear" class="btn btn-primary" onclick="clearForm()" value="Puhasta"></div>
+        
+
 </body>
 </html>

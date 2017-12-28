@@ -1,7 +1,6 @@
 #mainForm{
     width: 400px;
     margin: 0 auto;
+    padding: 10;
 }
-#form-control{
-    width: 300px;
-}
+
