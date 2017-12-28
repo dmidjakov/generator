@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type "text/css" href="css/styles.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="js/jquery-1.12.4.js"></script>
+        <script src="js/jquery-1.12.4.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script type="text/javascript" src="start.js"></script>
     <script>
             $( function() {
               $( "#datepicker" ).datepicker({ dateFormat: 'dd.mm.yy' , firstDay: 1});
             } );
+           
             </script>
     <title></title>
 </head>
@@ -216,8 +216,20 @@
          </div>
                                     
 </form>  
-<div ><br><input type="button" id="btnSearch" class="btn btn-primary" onclick="generateFile()" value="Genereeri!"> &nbsp; <input type="button" id="btnClear" class="btn btn-primary" onclick="clearForm()" value="Puhasta"></div>
+<div ><br><input type="button" id="btnSearch" class="btn btn-primary" onclick="generateFile()" value="Genereeri!"> &nbsp; <button type="button" onclick="clearForm()" class="btn btn-primary">
+    Puhasta <span id="bgg" class="badge badge-light">423</span>
+  </button> </div>
         
-
+  <script>
+  let sqlite2 = require('sqlite-sync');
+sqlite2.connect('db/sample.db');
+let freeRefNum = sqlite2.run("select count (viitenum) from viitenumbrid");
+let freeRefNumArr = freeRefNum;
+console.log(freeRefNum);
+console.log(freeRefNumArr);
+finRefNum =JSON.parse(freeRefNumArr);
+document.getElementById("bgg").innerHTML = finRefNum;
+  
+  </script>
 </body>
 </html>

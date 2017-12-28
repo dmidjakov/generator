@@ -10,8 +10,6 @@ var content = fs.readFileSync(path.resolve('BlankDoc.docx'), 'binary');
 var zip = new JSZip(content);
 var doc = new Docxtemplater();
 doc.loadZip(zip);
-let sqlite = require('sqlite-sync');
-sqlite.connect('db/sample.db');
 
 
 function clearForm(){
@@ -23,12 +21,13 @@ chrome.runtime.reload();
 function generateFile() {
 
 let rows = sqlite.run("select * from viitenumbrid where viitenum is not null limit 1");
+
 let viitenumArr = rows[0];
-viitenumber =JSON.parse(viitenumArr.viitenum);
-    nimi = document.getElementById("mainForm").elements[0].value;
+    viitenumber =JSON.parse(viitenumArr.viitenum);
+    nimi = document.getElementById("mainForm").elements[0].value.toUpperCase();
     kood = document.getElementById("mainForm").elements[1].value;
     elukoht = document.getElementById("mainForm").elements[2].value;
-    mark = document.getElementById("mainForm").elements[3].value;
+    mark = document.getElementById("mainForm").elements[3].value.toUpperCase();
     kuupaev = document.getElementById("mainForm").elements[4].value;
     aeg = document.getElementById("mainForm").elements[5].value;
     koht = document.getElementById("mainForm").elements[6].value;
