@@ -10,7 +10,7 @@ var content = fs.readFileSync(path.resolve('BlankDoc.docx'), 'binary');
 var zip = new JSZip(content);
 var doc = new Docxtemplater();
 doc.loadZip(zip);
-
+let sqlite = require('sqlite-sync');
 
 function clearForm(){
 sqlite.run("DELETE FROM viitenumbrid WHERE viitenum = ?",[viitenumber]);
@@ -32,8 +32,21 @@ let viitenumArr = rows[0];
     aeg = document.getElementById("mainForm").elements[5].value;
     koht = document.getElementById("mainForm").elements[6].value;
     kirjeldus = document.getElementById("mainForm").elements[7].value;
-    Today = new Date();
-    koostamiseKPV=Today.getDate() + "." + (Today.getMonth()+1)  + "." + Today.getFullYear();
+    function formatDate(date) {
+        var monthNames = [
+          "01", "02", "03",
+          "04", "05", "06", "07",
+          "08", "09", "10",
+          "11", "12"
+        ];
+      
+        var day = date.getDate();
+        var monthIndex = date.getMonth();
+        var year = date.getFullYear();
+      
+        return day + '.' + monthNames[monthIndex] + '.' + year;
+      }
+        koostamiseKPV=formatDate(new Date());
 
     switch (kirjeldus) {
         case 'mootorsõiduk pargitud kohas, kus liikluskorraldusvahend seda ei luba, aga nimelt - liiklusmärgi nr 361 (peatumise keeld) mõjupiirkonnas.':
