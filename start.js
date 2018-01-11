@@ -67,7 +67,7 @@ let viitenumArr = rows[0];
          case 'mootorsõiduk pargitud kohas, kus liikluskorraldusvahend seda ei luba, aga nimelt - liiklusmärgi nr 364 (parkimiskeeld paaris kuupäeval) mõjupiirkonnas.':
          var  norm = 'liiklusseadus § 21 lg 4 p 2';
         break;
-         case 'mootorsõiduk pargitud kohas, kus liikluskorraldusvahend seda ei luba, aga nimelt - liiklusmärgi nr 874 (puudega inimese sõiduk) nõudeid eirates. Mootorsõidukis puudus puudega inimese sõiduki parkimiskaart':
+         case 'mootorsõiduk pargitud kohas, kus liikluskorraldusvahend seda ei luba, aga nimelt - liiklusmärgi nr 874 (puudega inimese sõiduk) nõudeid eirates. Mootorsõidukis puudus puudega inimese sõiduki parkimiskaart.':
          var  norm = 'liiklusseadus § 21 lg 4 p 2';
         break;
          case 'mootorsõiduk pargitud kohas, kus liikluskorraldusvahend seda ei luba, aga nimelt - teekattemärgise nr 976 (puudega inimese sõiduki parkimiskoht) nõudeid eirates.':
@@ -100,7 +100,7 @@ let viitenumArr = rows[0];
          case 'mootorsõiduk pargitud kohas, kus takistas teiste sõidukite lahkumise parkimiskohtadelt.':
        var    norm = 'liiklusseadus § 21 lg 4 p 8';
         break;
-         case 'mootorsõiduk pargitud viisil, mis takistab välja-/sissesõitu hoovi/teega külgnevale alale/ garaaži, õuealale':
+         case 'mootorsõiduk pargitud viisil, mis takistab välja-/sissesõitu hoovi/teega külgnevale alale/ garaaži, õuealale.':
        var    norm = 'liiklusseadus § 20 lg 1';
         break;
          
