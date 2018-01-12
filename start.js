@@ -11,9 +11,10 @@ var zip = new JSZip(content);
 var doc = new Docxtemplater();
 doc.loadZip(zip);
 let sqlite = require('sqlite-sync');
+sqlite.connect('db/sample.db');
 
 function clearForm(){
-sqlite.run("DELETE FROM viitenumbrid WHERE viitenum = ?",[viitenumber]);
+//sqlite.run("DELETE FROM viitenumbrid WHERE viitenum = ?",[viitenumber]);
 chrome.runtime.reload();
 
 };
