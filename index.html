@@ -217,8 +217,16 @@
                                     
 </form>  
 <div ><br><input type="button" id="btnSearch" class="btn btn-primary" onclick="generateFile()" value="Genereeri!"> &nbsp; <button type="button" onclick="clearForm()" class="btn btn-primary">
-    Puhasta <span id="bgg" class="badge badge-light"></span>
+    Puhasta &nbsp;<span id = "vitenLeft" class="badge badge-light"></span>
   </button> </div>
-        
+ <script>
+var sqlite2 = require ("sqlite-sync");
+sqlite2.connect('db/sample.db');
+let rows = sqlite2.run("select count (viitenum) as ne from viitenumbrid where viitenum is not null");
+//let www="count (viitenum)"
+let viitenumArr = rows[0];
+viitenumber =JSON.parse(viitenumArr.ne);
+document.getElementById("vitenLeft").innerHTML = viitenumber;
+ </script>       
 </body>
 </html>
